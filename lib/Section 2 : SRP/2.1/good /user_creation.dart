@@ -6,25 +6,25 @@ import 'package:solid_examples/Section%202%20:%20SRP/2.1/good%20/user_model.dart
 import 'package:solid_examples/Section%202%20:%20SRP/2.1/good%20/user_repository.dart';
 
 class UserCreation {
-  UserLogger userLogger;
-  UserRepository userRepository;
-  HashPassword hashPassword;
-  EmailValidation emailValidation;
-  EmailService emailService;
+  UserLogger _userLogger;
+  UserRepository _userRepository;
+  HashPassword _hashPassword;
+  EmailValidation _emailValidation;
+  EmailService _emailService;
 
   UserCreation(
-    this.userLogger,
-    this.userRepository,
-    this.hashPassword,
-    this.emailValidation,
-    this.emailService,
+    this._userLogger,
+    this._userRepository,
+    this._hashPassword,
+    this._emailValidation,
+    this._emailService,
   );
   void createUser(UserModel user) {
-    if (!emailValidation.isValidEmail(user.email)) return;
+    if (!_emailValidation.isValidEmail(user.email)) return;
 
-    hashPassword.hashPassword(user.password);
-    userRepository.saveToDatabase(user);
-    emailService.sendWelcomeEmail(user.email);
-    userLogger.logUserCreation(user);
+    _hashPassword.hashPassword(user.password);
+    _userRepository.saveToDatabase(user);
+    _emailService.sendWelcomeEmail(user.email);
+    _userLogger.logUserCreation(user);
   }
 }
